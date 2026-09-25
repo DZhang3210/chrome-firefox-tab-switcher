@@ -1,0 +1,7 @@
+{
+  "name": "tab_transfer",
+  "description": "Opens URLs in the other browser",
+  "path": "tab_transfer_win.bat",
+  "type": "stdio",
+  "allowed_extensions": ["tab_transfer@example.org"]
+}

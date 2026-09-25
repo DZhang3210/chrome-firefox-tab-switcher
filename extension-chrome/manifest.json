@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Transfer",
+  "description": "tab_transfer_code",
+  "version": "1.0",
+  "background": { "service_worker": "background.js" },
+  "icons": {
+    "16": "icons/replace16.png",
+    "32": "icons/replace32.png",
+    "48": "icons/replace48.png",
+    "128": "icons/replace128.png"
+  },
+  "permissions": ["nativeMessaging", "contextMenus", "tabs"],
+  "commands": {
+    "send-tab": {
+      "suggested_key": { "default": "Alt+Shift+S" },
+      "description": "Send current tab to Firefox"
+    }
+  }
+}
