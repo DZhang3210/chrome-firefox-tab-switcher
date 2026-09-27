@@ -10,6 +10,16 @@
     "48": "icons/replace48.png",
     "128": "icons/replace128.png"
   },
+   "action": {
+    "default_icon": {
+      "16": "icons/replace16.png",
+      "32": "icons/replace32.png"
+    },
+    "default_title": "install_helper",
+    "default_popup": "popup.html"
+  },
+
+
   "permissions": ["nativeMessaging", "contextMenus", "tabs"],
   "commands": {
     "send-tab": {

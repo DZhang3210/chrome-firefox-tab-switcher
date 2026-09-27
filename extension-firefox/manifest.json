@@ -20,7 +20,9 @@
   },
 
   "action": {
-    "default_icon": "icons/replace.svg"
+    "default_icon":  "icons/replace.svg",
+    "default_title": "install_helper",
+    "default_popup": "popup.html"
   },
 
   "permissions": ["nativeMessaging", "menus", "tabs"],

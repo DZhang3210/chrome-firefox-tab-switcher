@@ -1,11 +1,6 @@
-import json, struct, subprocess, sys
+import json, struct, subprocess, sys, os
 
-BROWSERS = {
-    "chrome":  
-    r"C:\Program Files\Google\Chrome\Application\chrome.exe",
-    "firefox": 
-    r"C:\Program Files\Mozilla Firefox\firefox.exe",
-}
+EXE_NAMES = {"chrome": "chrome.exe", "firefox": "firefox.exe"}
 
 def read_message():
     raw_len = sys.stdin.buffer.read(4)               # first 4 bytes = message length
@@ -20,12 +15,7 @@ def send_message(obj):
 
 msg = read_message()
 try:
-    subprocess.Popen(
-        [BROWSERS[msg["target"]], msg["url"]],
-        # Browsers kill the helper's child processes when the helper exits.
-        # These flags let the launched browser keep running.
-        creationflags=subprocess.CREATE_BREAKAWAY_FROM_JOB | subprocess.DETACHED_PROCESS,
-    )
+    os.startfile(EXE_NAMES[msg["target"]], arguments=msg["url"])
     send_message({"ok": True})
 except Exception as e:
     send_message({"ok": False, "error": str(e)})
