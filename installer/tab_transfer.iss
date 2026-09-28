@@ -1,9 +1,9 @@
 ; Inno Setup script for the Tab Transfer native helper.
-; Build the helper first (from the project root):  pyinstaller --onefile app\tab_transfer.py
+; Build the helper first (from the project root):  pyinstaller --onedir app\tab_transfer.py
 ; Then compile this file in the Inno Setup Compiler.
 
 #define AppName "Tab Transfer Helper"
-#define AppVersion "1.0"
+#define AppVersion "1.1"
 
 [Setup]
 ; Unique ID for this app. Keep it the same in every version so upgrades replace the old install.
@@ -26,7 +26,8 @@ WizardStyle=modern
 UninstallDisplayName={#AppName}
 
 [Files]
-Source: "..\dist\tab_transfer.exe"; DestDir: "{app}"; Flags: ignoreversion
+; One-folder PyInstaller build: tab_transfer.exe plus its _internal\ folder
+Source: "..\dist\tab_transfer\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "tab_transfer_chrome.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "tab_transfer_firefox.json"; DestDir: "{app}"; Flags: ignoreversion
 
