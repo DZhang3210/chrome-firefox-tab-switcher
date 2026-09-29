@@ -141,13 +141,6 @@ ol li::before {
   text-align: center;
 }
 
-kbd {
-  padding: 1px 5px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  font: 12px ui-monospace, Consolas, monospace;
-}
-
 .note {
   margin-top: 12px;
   padding: 10px 12px;

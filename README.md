@@ -3,12 +3,10 @@
 - We define the `background` which essentially allows us to check and detect keypresses
 - We define the `icons`
 - We define `permissions`, so what it can primarily do
-- It defines a new command called `send_tab`, which we will later attach a resultant action in `background.js`
 
 ## What happens in background.js?
 - We define what happens in the menu. The context defines in what context they appear. For example, we get different when right click a tab vs when we right click a web page
 - Then we add a listener, and notice how we can define different results on different webpages, based on the id of whatever got pressed, which we defined above. One more quirk is that when defining an extension we are only able to  track the resultant clicks of menus we created via the extension. This means that, when we use `else` there's no risk of us accidentally overwriting the affect of other menu items
-- Below this, it might seem a bit confusing, since we don't have a menuItem with the id of `send-tab`; however, that makes sense, since its not linked to the menu, but rather the shortcut-id we defined in `manifest.json`
 - The final code defines how we actually trigger the tab updates. We can do a lot with permissions of an extension, but in particular, we want to define an update of a seperate external browser, which, of course, requires some sort of external program to do so. Which is why we use `tab_transfer`.
 
 ## How are we going to hook up Native Messaging

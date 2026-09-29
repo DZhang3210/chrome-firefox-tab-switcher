@@ -24,13 +24,6 @@ menus.onClicked.addListener((info, tab) => {
   else if (info.menuItemId === "send-page") sendTab(tab);
 });
 
-// Keyboard shortcut handler
-api.commands.onCommand.addListener(async (command) => {
-  if (command !== "send-tab") return;
-  const [tab] = await api.tabs.query({ active: true, currentWindow: true });
-  sendTab(tab);
-});
-
 async function sendTab(tab) {
   const ok = await send(tab.url);
   if (ok) api.tabs.remove(tab.id); // close it here = "move"; delete this line for "copy"

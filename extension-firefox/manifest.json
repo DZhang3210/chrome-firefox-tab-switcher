@@ -25,11 +25,5 @@
     "default_popup": "popup.html"
   },
 
-  "permissions": ["nativeMessaging", "menus", "tabs"],
-  "commands": {
-       "send-tab": {
-          "suggested_key": {"default":"Alt+Shift+S"},
-          "description": "Send current tab to Chrome"
-    }
-  }
+  "permissions": ["nativeMessaging", "menus", "tabs"]
 }

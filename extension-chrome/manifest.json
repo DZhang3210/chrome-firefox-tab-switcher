@@ -20,11 +20,5 @@
   },
 
 
-  "permissions": ["nativeMessaging", "contextMenus", "tabs"],
-  "commands": {
-    "send-tab": {
-      "suggested_key": { "default": "Alt+Shift+S" },
-      "description": "Send current tab to Firefox"
-    }
-  }
+  "permissions": ["nativeMessaging", "contextMenus", "tabs"]
 }
