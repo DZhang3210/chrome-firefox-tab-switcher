@@ -1,25 +1,39 @@
-# chrome-firefox-tab-switcher
-## What is the manifest.json for?
-- We define the `background` which essentially allows us to check and detect keypresses
-- We define the `icons`
-- We define `permissions`, so what it can primarily do
+# Tab Transfer
 
-## What happens in background.js?
-- We define what happens in the menu. The context defines in what context they appear. For example, we get different when right click a tab vs when we right click a web page
-- Then we add a listener, and notice how we can define different results on different webpages, based on the id of whatever got pressed, which we defined above. One more quirk is that when defining an extension we are only able to  track the resultant clicks of menus we created via the extension. This means that, when we use `else` there's no risk of us accidentally overwriting the affect of other menu items
-- The final code defines how we actually trigger the tab updates. We can do a lot with permissions of an extension, but in particular, we want to define an update of a seperate external browser, which, of course, requires some sort of external program to do so. Which is why we use `tab_transfer`.
+Send tabs and links between **Chrome** and **Firefox** with a right-click.
 
-## How are we going to hook up Native Messaging
-- Firstly, before just using send on anything, we want to ensure we are not doing it any internal link. For example, anything starting with 'chrome://' since those would represent internal offline sites
-- Next, when we send, we send to `tab_transfer`, which is a little convoluted in how it gets called. Inside the windows registry we can define external programs associated with extension, where their key would be `key_transfer` and the link is the absolute path to a special json, which defines the program and a couple other settings
+Browsers can't open other browsers on their own, so Tab Transfer has two parts: a browser extension for each browser, and a small helper app for Windows that opens the link in the other browser.
 
-## What does Tab_Transfer_(Chrome/Firefox) do?
-- we define the path, which is a windows executable, and then we also define an allowed origin. In firefox, we set our own unique_id for the extension, and in chrome we get the extension id defined, for us, by chrome
+```
+Firefox extension ─┐                          ┌─▶ opens the tab in Chrome
+                   ├─▶ Tab Transfer helper ───┤
+Chrome extension  ─┘    (Windows app)         └─▶ opens the tab in Firefox
+```
 
-## What does tab_transfer do?
-- When using tab_transfer, there's a couple additional technicalities which need to be fully ironed out. When we read `utf-8`. It starts with an intial 4 byte length, which defines the length of the buffer. This has to be done, so that we can then subsequently we can load is a JSON. The operation of `json.loads` is automatically able to detect if something is a `dict` and shape it accordingly
-- When sending a message the only sort of tricky thing is that we use `buffer.flush`. This essentially just confirms what we wrote and actually sends it to the program. For example, when you write something in a text message, you can compile a bunch of text, but it doesn't get sent until you specifically write send, which is exactly how this works.
-- Then it creates a subprocess, to open the equivelant tab in chrome, which by default adds the tab into any preexisiting chrome instance rather than creating a seperate one.
+## Install
+
+1. **Install the extension** in one or both browsers:
+   - Firefox: *coming soon to addons.mozilla.org*
+   - Chrome: *coming soon to the Chrome Web Store*
+2. **Install the helper app**: download [`TabTransferSetup.exe`](https://github.com/DZhang3210/chrome-firefox-tab-switcher/releases/latest/download/TabTransferSetup.exe) from the [latest release](https://github.com/DZhang3210/chrome-firefox-tab-switcher/releases/latest) and run it.
+   - Windows 10/11, 64-bit. No admin rights needed.
+   - If Windows shows **"Windows protected your PC"**, click **More info → Run anyway**. The installer isn't code-signed yet; everything it installs is built from the source in this repository.
+
+After installing the extension, a welcome page walks you through these steps and shows when the helper is detected.
+
+## Usage
+
+- **Right-click a page** → **Send to Chrome** / **Send to Firefox**. The page opens in the other browser and the tab closes. In Firefox, you can also right-click a tab.
+- **Right-click a link** → **Open link in chrome** / **Open link in firefox** to open just that link.
+- **Click the Tab Transfer icon** in the toolbar to check the helper's status: *You're all set*, *Update available*, or setup instructions.
+
+Only regular web pages (`http` and `https`) can be sent. Browser-internal pages like `chrome://settings` or `about:config` are skipped.
+
+## Privacy
+
+Tab Transfer collects no data. The only thing the extension sends is the URL of the tab or link you choose, and only to the helper app on your own computer, which passes it straight to the other browser. Nothing is sent over the internet.
+
+If something goes wrong, the helper writes the error to `%TEMP%\tab_transfer.log`. Nothing is logged during normal use.
 
 ## Uninstalling
 Tab Transfer has three parts, and each one is removed separately:
@@ -29,7 +43,50 @@ Tab Transfer has three parts, and each one is removed separately:
 
 Removing an extension doesn't remove the helper app, since both extensions share it. If you still use Tab Transfer in the other browser, keep the helper installed.
 
-## Additional Addendums
-- Added the additional functionality to be able to automatically detect if the tab_switcher native app is downloads by having it send a `ping`
-- Added simple link to be able to easily uninstall native app w/ ease
-- Added ability for items to be able to check for current version and identify outdated versions
+## Troubleshooting
+
+**The popup says the helper isn't installed, but I installed it.**
+Reopen the popup, or click **check again**. If it still isn't detected, run the installer again: it repairs the registry entries the browsers use to find the helper.
+
+**Sending does nothing.**
+Open the popup first. If it shows *Update available*, install the latest helper. Also check that the page is a regular website, not a browser-internal page.
+
+**Something else went wrong.**
+Check `%TEMP%\tab_transfer.log` (paste that into Win+R to open it) and [open an issue](https://github.com/DZhang3210/chrome-firefox-tab-switcher/issues) with its contents.
+
+## Building from source
+
+Requirements: Windows, Python 3.10+, [Inno Setup 6](https://jrsoftware.org/isinfo.php), and Node.js (for `web-ext`).
+
+```powershell
+python -m venv .venv
+.venv\Scripts\python -m pip install pyinstaller
+```
+
+The version number lives in the `VERSION` file. `build.py` stamps it into both extension manifests, builds the helper with PyInstaller, and compiles the installer:
+
+```powershell
+.venv\Scripts\python build.py
+```
+
+The installer is written to `installer\Output\TabTransferSetup.exe`. To package the extensions for the stores:
+
+```powershell
+npx web-ext build --source-dir extension-firefox --artifacts-dir web-ext-artifacts/firefox --overwrite-dest
+npx web-ext build --source-dir extension-chrome --artifacts-dir web-ext-artifacts/chrome --overwrite-dest
+```
+
+### Project layout
+
+| Path | Contents |
+|---|---|
+| `extension-chrome/`, `extension-firefox/` | The browser extensions: right-click menu, popup, and welcome page |
+| `app/tab_transfer.py` | The helper app (native messaging host) |
+| `app/*.json`, `app/tab_transfer_win.bat` | Host manifests and launcher for running the helper from source |
+| `installer/` | Inno Setup script and the host manifests used by the installer |
+| `build.py`, `VERSION` | Release build script and the single version number |
+| `docs/how-it-works.md` | A walkthrough of how each piece works |
+
+## License
+
+[MIT](LICENSE)
