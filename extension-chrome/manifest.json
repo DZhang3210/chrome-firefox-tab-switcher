@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Tab Transfer",
   "description": "tab_transfer_code",
-  "version": "1.0",
+  "version": "1.2",
   "background": { "service_worker": "background.js" },
   "icons": {
     "16": "icons/replace16.png",

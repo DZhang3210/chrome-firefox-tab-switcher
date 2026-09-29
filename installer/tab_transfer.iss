@@ -1,9 +1,12 @@
 ; Inno Setup script for the Tab Transfer native helper.
-; Build the helper first (from the project root):  pyinstaller --onedir app\tab_transfer.py
-; Then compile this file in the Inno Setup Compiler.
+; Normally built by build.py in the project root, which builds the helper first.
+; You can still compile this file in the Inno Setup Compiler once dist\tab_transfer exists.
 
 #define AppName "Tab Transfer Helper"
-#define AppVersion "1.2"
+; The version comes from the VERSION file in the project root
+#define VersionFile FileOpen(AddBackslash(SourcePath) + "..\VERSION")
+#define AppVersion Trim(FileRead(VersionFile))
+#expr FileClose(VersionFile)
 
 [Setup]
 ; Unique ID for this app. Keep it the same in every version so upgrades replace the old install.

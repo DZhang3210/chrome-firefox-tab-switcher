@@ -3,7 +3,7 @@
   "description": "tab_transfer_code",
   "manifest_version": 3,
   "name": "Tab Transfer",
-  "version": "1.0",
+  "version": "1.2",
   "icons": {
     "48": "icons/replace.svg"
   },

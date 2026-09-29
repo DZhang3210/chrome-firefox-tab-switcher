@@ -1,7 +1,7 @@
 const api = globalThis.browser ?? chrome;
 const HOST = "tab_transfer";
-// Keep in sync with VERSION in app/tab_transfer.py
-const LATEST_VERSION = "1.2";
+// The extension's own version, which build.py sets from the repo's VERSION file
+const LATEST_VERSION = api.runtime.getManifest().version;
 
 const uninstallFooter = document.getElementById("uninstall-footer");
 const uninstallButton = document.getElementById("uninstall");

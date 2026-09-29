@@ -33,4 +33,5 @@ Removing an extension doesn't remove the helper app, since both extensions share
 
 ## Additional Addendums
 - Added the additional functionality to be able to automatically detect if the tab_switcher native app is downloads by having it send a `ping`
-- Added 
+- Added simple link to be able to easily uninstall native app w/ ease
+- Added ability for items to be able to check for current version and identify outdated versions

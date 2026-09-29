@@ -1,7 +1,16 @@
 import glob, json, os, struct, subprocess, sys, tempfile, time, traceback, winreg
 
-# Keep in sync with AppVersion in installer/tab_transfer.iss and LATEST_VERSION in popup.js
-VERSION = "1.2"
+def read_version():
+    # The repo's VERSION file: bundled into the build by PyInstaller (sys._MEIPASS),
+    # or read from the repo root when running from source
+    base = getattr(sys, "_MEIPASS", os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+    try:
+        with open(os.path.join(base, "VERSION"), encoding="utf-8") as f:
+            return f.read().strip()
+    except OSError:
+        return None  # the popup treats an unknown version as outdated
+
+VERSION = read_version()
 
 LOG_PATH = os.path.join(tempfile.gettempdir(), "tab_transfer.log")
 

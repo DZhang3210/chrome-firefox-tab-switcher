@@ -2,10 +2,10 @@
 
 
 a = Analysis(
-    ['app/tab_transfer.py'],
+    ['C:/Users/david/Downloads/LinkChromeToFirefox/app/tab_transfer.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('C:/Users/david/Downloads/LinkChromeToFirefox/VERSION', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
