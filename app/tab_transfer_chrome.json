@@ -3,5 +3,8 @@
   "description": "Opens URLs in the other browser",
   "path": "tab_transfer_win.bat",
   "type": "stdio",
-  "allowed_origins": ["chrome-extension://ogceepadhdnpjlnepaancckppjjeceoo/"]
+  "allowed_origins": [
+    "chrome-extension://dipefmhpjeblhbdokcemocmpfcjgljff/",
+    "chrome-extension://ogceepadhdnpjlnepaancckppjjeceoo/"
+  ]
 }
