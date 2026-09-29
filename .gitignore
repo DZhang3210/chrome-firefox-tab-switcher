@@ -3,6 +3,7 @@ dist/
 build/
 out/
 release/
+web-ext-artifacts/
 
 # Installers / binaries
 *.exe
