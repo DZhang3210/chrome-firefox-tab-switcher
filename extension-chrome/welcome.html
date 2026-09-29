@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome to Tab Transfer</title>
+    <link rel="stylesheet" href="welcome.css">
+  </head>
+  <body>
+    <header>
+      <img src="icons/replace48.png" alt="">
+      <div>
+        <h1>Tab Transfer is installed</h1>
+        <p class="route">Chrome → Firefox</p>
+      </div>
+    </header>
+    <p class="lead">Three quick steps and you can send any tab or link from Chrome to Firefox.</p>
+
+    <section class="step">
+      <h2><span class="step-number">1</span> Pin Tab Transfer to your toolbar</h2>
+      <p>
+        Click the <strong>puzzle-piece icon</strong> 🧩 at the top right of Chrome, then click the
+        <strong>pin</strong> 📌 next to <strong>Tab Transfer</strong>.
+      </p>
+      <p>
+        The Tab Transfer icon <img class="icon-inline" src="icons/replace32.png" alt=""> then stays next to the
+        address bar. Click it any time to check that everything is working.
+      </p>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-number">2</span> Install the helper app</h2>
+      <p>Chrome can't open Firefox by itself, so Tab Transfer uses a small helper app on your computer.</p>
+      <p id="helper-status" class="helper-status">Checking for the helper app…</p>
+      <div id="helper-download" hidden>
+        <a class="download" target="_blank"
+           href="https://github.com/DZhang3210/chrome-firefox-tab-switcher/releases/latest/download/TabTransferSetup.exe">
+          Download the helper app
+        </a>
+        <p class="platform">Windows 10/11 · no admin rights needed</p>
+        <p>
+          Open the downloaded <strong>TabTransferSetup.exe</strong>. If Windows says
+          <em>"Windows protected your PC"</em>, click <strong>More info → Run anyway</strong>. The helper is
+          <a target="_blank" href="https://github.com/DZhang3210/chrome-firefox-tab-switcher">open source</a>
+          and only opens links in the other browser.
+        </p>
+        <button id="recheck" class="secondary">I've installed it – check again</button>
+      </div>
+    </section>
+
+    <section class="step">
+      <h2><span class="step-number">3</span> Send a tab</h2>
+      <p>Right-click anywhere on a page → <strong>Send to Firefox</strong>. The page opens in Firefox and closes here.</p>
+      <p>Right-click a link → <strong>Open link in firefox</strong> to open just that link.</p>
+    </section>
+
+    <footer>You can close this tab now. To remove Tab Transfer later, click its icon → <strong>Uninstall helper app</strong>.</footer>
+
+    <script src="welcome.js"></script>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 {
 
-  "description": "tab_transfer_code",
+  "description": "Send tabs and links from Firefox to Chrome with a right-click. Requires the free Tab Transfer helper app for Windows.",
   "manifest_version": 3,
   "name": "Tab Transfer",
   "version": "1.2",
@@ -10,8 +10,12 @@
 
   "browser_specific_settings": {
     "gecko": {
-      "id": "tab_transfer@example.org",
-      "strict_min_version": "109.0"
+      "id": "tab-transfer@dzhang3210.github.io",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {"required":["none"]}
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
     }
   },
 
@@ -21,8 +25,9 @@
 
   "action": {
     "default_icon":  "icons/replace.svg",
-    "default_title": "install_helper",
-    "default_popup": "popup.html"
+    "default_title": "Tab Transfer",
+    "default_popup": "popup.html",
+    "default_area": "navbar"
   },
 
   "permissions": ["nativeMessaging", "menus", "tabs"]

@@ -3,5 +3,5 @@
   "description": "Opens URLs in the other browser",
   "path": "tab_transfer.exe",
   "type": "stdio",
-  "allowed_extensions": ["tab_transfer@example.org"]
+  "allowed_extensions": ["tab-transfer@dzhang3210.github.io"]
 }

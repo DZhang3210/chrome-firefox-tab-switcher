@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Tab Transfer",
-  "description": "tab_transfer_code",
+  "description": "Send tabs and links from Chrome to Firefox with a right-click. Requires the free Tab Transfer helper app for Windows.",
   "version": "1.2",
   "background": { "service_worker": "background.js" },
   "icons": {
@@ -15,7 +15,7 @@
       "16": "icons/replace16.png",
       "32": "icons/replace32.png"
     },
-    "default_title": "install_helper",
+    "default_title": "Tab Transfer",
     "default_popup": "popup.html"
   },
 

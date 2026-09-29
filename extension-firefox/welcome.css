@@ -1,0 +1,84 @@
+/* The welcome page reuses the popup's colors and components, laid out for a full tab */
+@import url("popup.css");
+
+body {
+  width: auto;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 16px;
+  font-size: 15px;
+}
+
+header img {
+  width: 48px;
+  height: 48px;
+}
+
+h1 {
+  font-size: 22px;
+}
+
+.route {
+  font-size: 14px;
+}
+
+.lead {
+  margin: 0 0 28px;
+  color: var(--muted);
+}
+
+.step {
+  margin-bottom: 28px;
+}
+
+.step h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 17px;
+}
+
+.step-number {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: 14px;
+  line-height: 26px;
+  text-align: center;
+}
+
+.step p {
+  margin: 0 0 10px;
+}
+
+.icon-inline {
+  width: 18px;
+  height: 18px;
+  vertical-align: -3px;
+}
+
+.helper-status {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--warn);
+  border-radius: 6px;
+}
+
+.helper-status.ok {
+  border-left-color: var(--ok);
+}
+
+.download {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.secondary {
+  display: inline-block;
+  width: auto;
+}

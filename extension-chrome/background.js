@@ -8,7 +8,10 @@ const menus = api.menus ?? api.contextMenus;
 api.runtime.setUninstallURL("https://github.com/DZhang3210/chrome-firefox-tab-switcher#uninstalling");
 
 // Create the right-click menu items once, on install
-api.runtime.onInstalled.addListener(() => {
+api.runtime.onInstalled.addListener(({ reason }) => {
+  // First install only (not updates): show pinning and helper setup steps
+  if (reason === "install") api.tabs.create({ url: api.runtime.getURL("welcome.html") });
+
   menus.create({
     id: "send-page",
     title: LABEL,
