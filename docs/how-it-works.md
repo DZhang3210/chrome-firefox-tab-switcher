@@ -1,4 +1,4 @@
-# How Tab Transfer works
+# How Tab Ferry works
 
 A walkthrough of each piece of the project and why it's built the way it is.
 

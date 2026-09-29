@@ -1,8 +1,8 @@
 {
 
-  "description": "Send tabs and links from Firefox to Chrome with a right-click. Requires the free Tab Transfer helper app for Windows.",
+  "description": "Send tabs and links from Firefox to Chrome with a right-click. Requires the free Tab Ferry helper app for Windows.",
   "manifest_version": 3,
-  "name": "Tab Transfer",
+  "name": "Tab Ferry – Send to Chrome",
   "version": "1.2",
   "icons": {
     "48": "icons/replace.svg"
@@ -22,7 +22,7 @@
 
   "action": {
     "default_icon":  "icons/replace.svg",
-    "default_title": "Tab Transfer",
+    "default_title": "Tab Ferry",
     "default_popup": "popup.html",
     "default_area": "navbar"
   },

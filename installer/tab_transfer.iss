@@ -1,8 +1,8 @@
-; Inno Setup script for the Tab Transfer native helper.
+; Inno Setup script for the Tab Ferry native helper.
 ; Normally built by build.py in the project root, which builds the helper first.
 ; You can still compile this file in the Inno Setup Compiler once dist\tab_transfer exists.
 
-#define AppName "Tab Transfer Helper"
+#define AppName "Tab Ferry Helper"
 ; The version comes from the VERSION file in the project root
 #define VersionFile FileOpen(AddBackslash(SourcePath) + "..\VERSION")
 #define AppVersion Trim(FileRead(VersionFile))
@@ -16,13 +16,13 @@ AppVersion={#AppVersion}
 AppPublisher=David Zhang
 ; Per-user install: no admin prompt, and {autopf} becomes %LOCALAPPDATA%\Programs
 PrivilegesRequired=lowest
-DefaultDirName={autopf}\TabTransfer
+DefaultDirName={autopf}\TabFerry
 DisableDirPage=yes
 DisableProgramGroupPage=yes
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 OutputDir=Output
-OutputBaseFilename=TabTransferSetup
+OutputBaseFilename=TabFerrySetup
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern

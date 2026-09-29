@@ -16,7 +16,7 @@ ISCC_CANDIDATES = [
 version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 if not re.fullmatch(r"\d+(\.\d+){0,3}", version):
     sys.exit(f"VERSION must look like 1.2 or 1.2.3 (browsers require it), got {version!r}")
-print(f"== Building Tab Transfer {version}")
+print(f"== Building Tab Ferry {version}")
 
 # 1. Extension manifests: replace only the top-level "version" value, keeping each file's formatting
 for browser in ("chrome", "firefox"):
@@ -41,5 +41,5 @@ if iscc is None:
     sys.exit("ISCC.exe not found - is Inno Setup 6 installed?")
 subprocess.run([str(iscc), "/Q", str(ROOT / "installer" / "tab_transfer.iss")], check=True)
 
-print(f"== Done: {ROOT / 'installer' / 'Output' / 'TabTransferSetup.exe'} (version {version})")
+print(f"== Done: {ROOT / 'installer' / 'Output' / 'TabFerrySetup.exe'} (version {version})")
 print("   Reload both extensions to pick up the new manifest version.")

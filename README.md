@@ -1,12 +1,12 @@
-# Tab Transfer
+# Tab Ferry
 
 Send tabs and links between **Chrome** and **Firefox** with a right-click.
 
-Browsers can't open other browsers on their own, so Tab Transfer has two parts: a browser extension for each browser, and a small helper app for Windows that opens the link in the other browser.
+Browsers can't open other browsers on their own, so Tab Ferry has two parts: a browser extension for each browser, and a small helper app for Windows that opens the link in the other browser.
 
 ```
 Firefox extension ─┐                          ┌─▶ opens the tab in Chrome
-                   ├─▶ Tab Transfer helper ───┤
+                   ├─▶ Tab Ferry helper ───┤
 Chrome extension  ─┘    (Windows app)         └─▶ opens the tab in Firefox
 ```
 
@@ -15,7 +15,7 @@ Chrome extension  ─┘    (Windows app)         └─▶ opens the tab in Fir
 1. **Install the extension** in one or both browsers:
    - Firefox: *coming soon to addons.mozilla.org*
    - Chrome: *coming soon to the Chrome Web Store*
-2. **Install the helper app**: download [`TabTransferSetup.exe`](https://github.com/DZhang3210/chrome-firefox-tab-switcher/releases/latest/download/TabTransferSetup.exe) from the [latest release](https://github.com/DZhang3210/chrome-firefox-tab-switcher/releases/latest) and run it.
+2. **Install the helper app**: download [`TabFerrySetup.exe`](https://github.com/DZhang3210/chrome-firefox-tab-switcher/releases/latest/download/TabFerrySetup.exe) from the [latest release](https://github.com/DZhang3210/chrome-firefox-tab-switcher/releases/latest) and run it.
    - Windows 10/11, 64-bit. No admin rights needed.
    - If Windows shows **"Windows protected your PC"**, click **More info → Run anyway**. The installer isn't code-signed yet; everything it installs is built from the source in this repository.
 
@@ -25,23 +25,23 @@ After installing the extension, a welcome page walks you through these steps and
 
 - **Right-click a page** → **Send to Chrome** / **Send to Firefox**. The page opens in the other browser and the tab closes. In Firefox, you can also right-click a tab.
 - **Right-click a link** → **Open link in chrome** / **Open link in firefox** to open just that link.
-- **Click the Tab Transfer icon** in the toolbar to check the helper's status: *You're all set*, *Update available*, or setup instructions.
+- **Click the Tab Ferry icon** in the toolbar to check the helper's status: *You're all set*, *Update available*, or setup instructions.
 
 Only regular web pages (`http` and `https`) can be sent. Browser-internal pages like `chrome://settings` or `about:config` are skipped.
 
 ## Privacy
 
-Tab Transfer collects no data. The only thing the extension sends is the URL of the tab or link you choose, and only to the helper app on your own computer, which passes it straight to the other browser. Nothing is sent over the internet.
+Tab Ferry collects no data. The only thing the extension sends is the URL of the tab or link you choose, and only to the helper app on your own computer, which passes it straight to the other browser. Nothing is sent over the internet.
 
 If something goes wrong, the helper writes the error to `%TEMP%\tab_transfer.log`. Nothing is logged during normal use.
 
 ## Uninstalling
-Tab Transfer has three parts, and each one is removed separately:
-1. **The helper app**: open the extension's popup and click **Uninstall helper app**, or go to **Settings → Apps → Installed apps → Tab Transfer Helper → Uninstall**. This removes its files and registry keys.
-2. **The Chrome extension**: `chrome://extensions` → Tab Transfer → **Remove**.
-3. **The Firefox extension**: `about:addons` → Tab Transfer → **⋯ → Remove**.
+Tab Ferry has three parts, and each one is removed separately:
+1. **The helper app**: open the extension's popup and click **Uninstall helper app**, or go to **Settings → Apps → Installed apps → Tab Ferry Helper → Uninstall**. This removes its files and registry keys.
+2. **The Chrome extension**: `chrome://extensions` → Tab Ferry → **Remove**.
+3. **The Firefox extension**: `about:addons` → Tab Ferry → **⋯ → Remove**.
 
-Removing an extension doesn't remove the helper app, since both extensions share it. If you still use Tab Transfer in the other browser, keep the helper installed.
+Removing an extension doesn't remove the helper app, since both extensions share it. If you still use Tab Ferry in the other browser, keep the helper installed.
 
 ## Troubleshooting
 
@@ -69,7 +69,7 @@ The version number lives in the `VERSION` file. `build.py` stamps it into both e
 .venv\Scripts\python build.py
 ```
 
-The installer is written to `installer\Output\TabTransferSetup.exe`. To package the extensions for the stores:
+The installer is written to `installer\Output\TabFerrySetup.exe`. To package the extensions for the stores:
 
 ```powershell
 npx web-ext build --source-dir extension-firefox --artifacts-dir web-ext-artifacts/firefox --overwrite-dest

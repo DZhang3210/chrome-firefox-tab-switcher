@@ -64,7 +64,7 @@ def handle(msg):
         # Inno Setup puts its uninstaller next to the helper; it asks the user to confirm
         uninstallers = glob.glob(os.path.join(os.path.dirname(sys.executable), "unins*.exe"))
         if not uninstallers:
-            raise FileNotFoundError("Uninstaller not found - was the helper installed with TabTransferSetup.exe?")
+            raise FileNotFoundError("Uninstaller not found - was the helper installed with TabFerrySetup.exe?")
         launch_detached([uninstallers[0]])
         return {"ok": True}
     launch_detached([find_browser(msg["target"]), msg["url"]])

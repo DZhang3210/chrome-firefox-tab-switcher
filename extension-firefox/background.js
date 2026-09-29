@@ -38,7 +38,7 @@ async function send(url) {
     const reply = await api.runtime.sendNativeMessage("tab_transfer", { url, target: TARGET });
     return reply?.ok === true;
   } catch (err) {
-    console.error("Tab Transfer failed:", err);
+    console.error("Tab Ferry failed:", err);
     return false;
   }
 }
