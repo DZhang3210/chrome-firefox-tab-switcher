@@ -1,4 +1,7 @@
-import json, os, struct, subprocess, sys, tempfile, time, traceback, winreg
+import glob, json, os, struct, subprocess, sys, tempfile, time, traceback, winreg
+
+# Keep in sync with AppVersion in installer/tab_transfer.iss and LATEST_VERSION in popup.js
+VERSION = "1.2"
 
 LOG_PATH = os.path.join(tempfile.gettempdir(), "tab_transfer.log")
 
@@ -35,16 +38,33 @@ def send_message(obj):
     sys.stdout.buffer.write(data)
     sys.stdout.buffer.flush()
 
+def launch_detached(args):
+    # Browsers kill the helper's child processes when the helper exits.
+    # Breaking away from that job lets the launched program keep running.
+    try:
+        subprocess.Popen(args, creationflags=subprocess.CREATE_BREAKAWAY_FROM_JOB | subprocess.DETACHED_PROCESS)
+    except PermissionError:
+        # This job doesn't allow breakaway; launching normally beats not launching at all
+        subprocess.Popen(args, creationflags=subprocess.DETACHED_PROCESS)
+
+def handle(msg):
+    action = msg.get("action", "open")
+    if action == "ping":
+        return {"ok": True, "version": VERSION}
+    if action == "uninstall":
+        # Inno Setup puts its uninstaller next to the helper; it asks the user to confirm
+        uninstallers = glob.glob(os.path.join(os.path.dirname(sys.executable), "unins*.exe"))
+        if not uninstallers:
+            raise FileNotFoundError("Uninstaller not found - was the helper installed with TabTransferSetup.exe?")
+        launch_detached([uninstallers[0]])
+        return {"ok": True}
+    launch_detached([find_browser(msg["target"]), msg["url"]])
+    return {"ok": True}
+
 try:
     msg = read_message()
     try:
-        subprocess.Popen(
-            [find_browser(msg["target"]), msg["url"]],
-            # Browsers kill the helper's child processes when the helper exits.
-            # These flags let the launched browser keep running.
-            creationflags=subprocess.CREATE_BREAKAWAY_FROM_JOB | subprocess.DETACHED_PROCESS,
-        )
-        send_message({"ok": True})
+        send_message(handle(msg))
     except Exception as e:
         log_error(f"launch failed for {msg}:\n{traceback.format_exc()}")
         send_message({"ok": False, "error": str(e)})

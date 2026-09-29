@@ -4,6 +4,9 @@ const TARGET = IS_FIREFOX ? "chrome" : "firefox";
 const LABEL = `Send to ${IS_FIREFOX ? "Chrome" : "Firefox"}`;
 const menus = api.menus ?? api.contextMenus;
 
+// Removing the extension can't remove the helper app, so point people to instructions for it
+api.runtime.setUninstallURL("https://github.com/DZhang3210/chrome-firefox-tab-switcher#uninstalling");
+
 // Create the right-click menu items once, on install
 api.runtime.onInstalled.addListener(() => {
   menus.create({

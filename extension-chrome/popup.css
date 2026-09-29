@@ -8,6 +8,8 @@
   --accent-text: #ffffff;
   --step-bg: #f6f8fa;
   --warn: #bf8700;
+  --ok: #1a7f37;
+  --danger: #cf222e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,11 +23,18 @@
     --accent-text: #0d1117;
     --step-bg: #2b2d31;
     --warn: #d29922;
+    --ok: #3fb950;
+    --danger: #f85149;
   }
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* The state sections toggle with the hidden attribute; don't let other display rules override it */
+[hidden] {
+  display: none !important;
 }
 
 body {
@@ -107,7 +116,7 @@ ol {
   counter-reset: step;
 }
 
-li {
+ol li {
   position: relative;
   margin-bottom: 6px;
   padding: 8px 10px 8px 38px;
@@ -116,7 +125,7 @@ li {
   counter-increment: step;
 }
 
-li::before {
+ol li::before {
   content: counter(step);
   position: absolute;
   left: 10px;
@@ -166,4 +175,87 @@ footer {
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 12px;
+}
+
+.status {
+  margin: 0;
+  color: var(--muted);
+}
+
+.status-card {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  color: var(--muted);
+}
+
+.status-card strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--text);
+}
+
+.status-card.ok {
+  border-left-color: var(--ok);
+}
+
+.status-card.warn {
+  border-left-color: var(--warn);
+}
+
+.tips {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.tips li {
+  margin-bottom: 4px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.secondary {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+}
+
+.secondary:hover {
+  background: var(--step-bg);
+}
+
+.danger-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--danger);
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.actions {
+  margin-top: 12px;
+}
+
+.uninstall {
+  text-align: center;
+}
+
+.manual {
+  margin: 8px 0 0;
+  text-align: left;
 }

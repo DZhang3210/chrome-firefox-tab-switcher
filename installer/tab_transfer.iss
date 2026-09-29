@@ -3,7 +3,7 @@
 ; Then compile this file in the Inno Setup Compiler.
 
 #define AppName "Tab Transfer Helper"
-#define AppVersion "1.1"
+#define AppVersion "1.2"
 
 [Setup]
 ; Unique ID for this app. Keep it the same in every version so upgrades replace the old install.

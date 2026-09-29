@@ -22,3 +22,15 @@
 - When using tab_transfer, there's a couple additional technicalities which need to be fully ironed out. When we read `utf-8`. It starts with an intial 4 byte length, which defines the length of the buffer. This has to be done, so that we can then subsequently we can load is a JSON. The operation of `json.loads` is automatically able to detect if something is a `dict` and shape it accordingly
 - When sending a message the only sort of tricky thing is that we use `buffer.flush`. This essentially just confirms what we wrote and actually sends it to the program. For example, when you write something in a text message, you can compile a bunch of text, but it doesn't get sent until you specifically write send, which is exactly how this works.
 - Then it creates a subprocess, to open the equivelant tab in chrome, which by default adds the tab into any preexisiting chrome instance rather than creating a seperate one.
+
+## Uninstalling
+Tab Transfer has three parts, and each one is removed separately:
+1. **The helper app**: open the extension's popup and click **Uninstall helper app**, or go to **Settings → Apps → Installed apps → Tab Transfer Helper → Uninstall**. This removes its files and registry keys.
+2. **The Chrome extension**: `chrome://extensions` → Tab Transfer → **Remove**.
+3. **The Firefox extension**: `about:addons` → Tab Transfer → **⋯ → Remove**.
+
+Removing an extension doesn't remove the helper app, since both extensions share it. If you still use Tab Transfer in the other browser, keep the helper installed.
+
+## Additional Addendums
+- Added the additional functionality to be able to automatically detect if the tab_switcher native app is downloads by having it send a `ping`
+- Added 
