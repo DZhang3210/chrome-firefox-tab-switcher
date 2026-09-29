@@ -10,7 +10,7 @@
 
   "browser_specific_settings": {
     "gecko": {
-      "id": "tab-transfer@dzhang3210.github.io",
+      "id": "tab-ferry@dzhang3210.github.io",
       "strict_min_version": "140.0",
       "data_collection_permissions": {"required":["none"]}
     }
