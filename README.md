@@ -63,7 +63,11 @@ python -m venv .venv
 .venv\Scripts\python -m pip install pyinstaller
 ```
 
-The version number lives in the `VERSION` file. `build.py` stamps it into both extension manifests, builds the helper with PyInstaller, and compiles the installer:
+There are two kinds of versions:
+- **The helper app's version** lives in the `VERSION` file. `build.py` builds the helper with PyInstaller and compiles the installer with that version.
+- **Each extension's version** lives in its own `manifest.json`, so extension-only changes (icons, text, fixes) can ship without a new helper release. The popup only asks users to update the helper when it's older than `MIN_HELPER_VERSION` in `popup.js`.
+
+To build the helper and installer:
 
 ```powershell
 .venv\Scripts\python build.py

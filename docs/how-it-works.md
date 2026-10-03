@@ -36,5 +36,6 @@ A walkthrough of each piece of the project and why it's built the way it is.
 - A PyInstaller `--onefile` build unpacks Python into a temporary folder every time it runs. When Firefox launched it, loading Python from that folder failed ("Failed to load Python DLL"), so every send from Firefox failed. A `--onedir` build keeps Python next to `tab_transfer.exe`, so nothing has to be unpacked. It also starts faster.
 
 ## Where does the version number come from?
-- The `VERSION` file in the project root is the single source. `build.py` copies it into both extension manifests and bundles it into the helper; the installer script reads it directly.
-- The popup compares the helper's version (from `ping`) with the extension's own version, to show when the helper needs an update.
+- There are two separate version numbers. The `VERSION` file is the **helper's** version: `build.py` bundles it into the helper, and the installer script reads it directly. Each **extension** has its own version in its `manifest.json`.
+- They're separate so that extension-only changes (like a new icon) don't force everyone to download a new helper. A store won't accept the same version twice, so the extension needs a new number for every upload, even when the helper hasn't changed.
+- The popup compares the helper's version (from `ping`) with `MIN_HELPER_VERSION` in `popup.js`, the oldest helper the extension works with. It only shows "Update available" if the helper is older than that. Bump `MIN_HELPER_VERSION` only when the extension starts relying on something new in the helper.

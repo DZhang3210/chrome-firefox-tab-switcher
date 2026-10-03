@@ -1,7 +1,8 @@
 const api = globalThis.browser ?? chrome;
 const HOST = "tab_transfer";
-// The extension's own version, which build.py sets from the repo's VERSION file
-const LATEST_VERSION = api.runtime.getManifest().version;
+// Oldest helper this extension works with. Bump it only when the extension starts relying on
+// something new in the helper - not for extension-only changes (icons, text, popup fixes).
+const MIN_HELPER_VERSION = "1.2";
 
 const uninstallFooter = document.getElementById("uninstall-footer");
 const uninstallButton = document.getElementById("uninstall");
@@ -40,7 +41,7 @@ async function check() {
   for (const el of document.querySelectorAll(".version")) {
     el.textContent = version ?? "1.1 or earlier";
   }
-  show(!version || isOlder(version, LATEST_VERSION) ? "outdated" : "ready");
+  show(!version || isOlder(version, MIN_HELPER_VERSION) ? "outdated" : "ready");
 }
 
 uninstallButton.addEventListener("click", async () => {

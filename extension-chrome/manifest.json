@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Tab Ferry – Send to Firefox",
   "description": "Send tabs and links from Chrome to Firefox with a right-click. Requires the free Tab Ferry helper app for Windows.",
-  "version": "1.2",
+  "version": "1.2.1",
   "background": { "service_worker": "background.js" },
   "icons": {
     "16": "icons/replace16.png",
